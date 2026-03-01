@@ -1,0 +1,298 @@
+Perfect 👍
+Below is the **complete list of APIs currently present in your backend code**, structured clearly so you can connect them to a React frontend.
+
+---
+
+# 🌐 BASE URL
+
+```bash
+http://localhost:5000/api
+```
+
+---
+
+# 👤 USER APIs
+
+---
+
+## 1️⃣ Register User
+
+**POST**
+
+```bash
+/api/users/register
+```
+
+### Body (JSON)
+
+```json
+{
+  "name": "Aditya",
+  "email": "user@gmail.com",
+  "password": "123456"
+}
+```
+
+### Response
+
+```json
+{
+  "msg": "User Registered Successfully"
+}
+```
+
+---
+
+## 2️⃣ Login User
+
+**POST**
+
+```bash
+/api/users/login
+```
+
+### Body
+
+```json
+{
+  "email": "user@gmail.com",
+  "password": "123456"
+}
+```
+
+### Response
+
+```json
+{
+  "token": "JWT_TOKEN",
+  "user": {
+    "id": "USER_ID",
+    "name": "Aditya",
+    "email": "user@gmail.com"
+  }
+}
+```
+
+⚠️ Save `token` in React (localStorage or context).
+
+---
+
+# 🏢 BUSINESS APIs
+
+---
+
+## 3️⃣ Register Business
+
+**POST**
+
+```bash
+/api/business/register
+```
+
+### Body
+
+```json
+{
+  "businessName": "Tech Store",
+  "ownerName": "Aditya",
+  "email": "business@gmail.com",
+  "password": "123456",
+  "category": "Electronics",
+  "description": "Best electronics shop",
+  "location": "Guwahati"
+}
+```
+
+### Response
+
+```json
+{
+  "msg": "Business Registered Successfully"
+}
+```
+
+---
+
+## 4️⃣ Login Business
+
+**POST**
+
+```bash
+/api/business/login
+```
+
+### Body
+
+```json
+{
+  "email": "business@gmail.com",
+  "password": "123456"
+}
+```
+
+### Response
+
+```json
+{
+  "token": "JWT_TOKEN",
+  "business": {
+    "id": "BUSINESS_ID",
+    "businessName": "Tech Store",
+    "email": "business@gmail.com"
+  }
+}
+```
+
+---
+
+## 5️⃣ Get All Businesses (Public List API)
+
+**GET**
+
+```bash
+/api/business
+```
+
+### Response
+
+```json
+[
+  {
+    "_id": "BUSINESS_ID",
+    "businessName": "Tech Store",
+    "ownerName": "Aditya",
+    "email": "business@gmail.com",
+    "category": "Electronics",
+    "description": "Best electronics shop",
+    "location": "Guwahati"
+  }
+]
+```
+
+Used in React for:
+
+* Home page listing
+* Search results
+* Business directory
+
+---
+
+## 6️⃣ Get Single Business
+
+**GET**
+
+```bash
+/api/business/:id
+```
+
+### Example
+
+```bash
+/api/business/65f3a0df7c9c21f2b3a45f1d
+```
+
+Used for:
+
+* Business detail page in React
+* Dynamic route `/business/:id`
+
+---
+
+## 7️⃣ Update Business (Protected 🔐)
+
+**PUT**
+
+```bash
+/api/business/:id
+```
+
+### Headers
+
+```bash
+Authorization: Bearer JWT_TOKEN
+Content-Type: application/json
+```
+
+### Body
+
+```json
+{
+  "businessName": "Updated Store",
+  "category": "Electronics",
+  "description": "Updated Description",
+  "location": "Assam"
+}
+```
+
+Used for:
+
+* Business dashboard edit page
+
+---
+
+# 🔐 AUTH SYSTEM
+
+* Passwords → bcrypt hashed
+* Login → returns JWT
+* Protected route → uses `Authorization: Bearer TOKEN`
+
+---
+
+# 📦 Summary Table (For React Integration)
+
+| Feature             | Method | Endpoint               | Auth Required |
+| ------------------- | ------ | ---------------------- | ------------- |
+| Register User       | POST   | /api/users/register    | ❌             |
+| Login User          | POST   | /api/users/login       | ❌             |
+| Register Business   | POST   | /api/business/register | ❌             |
+| Login Business      | POST   | /api/business/login    | ❌             |
+| List Businesses     | GET    | /api/business          | ❌             |
+| Get Single Business | GET    | /api/business/:id      | ❌             |
+| Update Business     | PUT    | /api/business/:id      | ✅             |
+
+---
+
+# 🧠 How React Will Use This
+
+Example React fetch:
+
+```js
+const res = await fetch("http://localhost:5000/api/business");
+const data = await res.json();
+```
+
+For protected route:
+
+```js
+await fetch(`/api/business/${id}`, {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + token
+  },
+  body: JSON.stringify(updatedData)
+});
+```
+
+---
+
+# 🚀 Your Backend Is Ready For:
+
+* React SPA
+* Context-based auth
+* Protected routes
+* Business dashboard
+* Public listing page
+
+---
+
+If you want next:
+
+* Create full React folder structure
+* Create API service layer file
+* Create AuthContext setup
+* Create ProtectedRoute component
+* Create BusinessCard component
+* Create full React starter template
+
+Tell me what you want next 🔥

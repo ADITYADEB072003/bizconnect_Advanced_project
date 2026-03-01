@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/app.js"></script>
+</head>
+<body onload="loadBusinessProfile()">
+
+<script>
+if (!localStorage.getItem("token") || localStorage.getItem("role") !== "business") {
+    window.location = "business-login.html";
+}
+</script>
+
+<h2>Edit Business Profile</h2>
+
+<button onclick="logout()">Logout</button><br><br>
+
+<input id="businessName"><br>
+<input id="ownerName"><br>
+<input id="category"><br>
+<textarea id="description"></textarea><br>
+<input id="location"><br>
+
+<button onclick="updateBusiness()">Update Profile</button>
+
+</body>
+</html>
