@@ -15,12 +15,14 @@ if (localStorage.getItem("token")) {
 }
 </script>
 
-<h2>User Login</h2>
+<div class="auth-container">
+    <h2>User Login</h2>
 
-<input id="email" placeholder="Email"><br>
-<input id="password" type="password" placeholder="Password"><br>
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
 
-<button onclick="userLogin()">Login</button>
+    <button class="btn full" onclick="userLogin()">Login</button>
+</div>
 
 </body>
 </html>

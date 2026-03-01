@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 const Business = require('../models/Business');
+const upload = require("../middleware/upload");
 
 /* ================= REGISTER ================= */
 
@@ -86,18 +87,49 @@ router.get('/', async (req, res) => {
     res.json(businesses);
 });
 
+/* ================= UPLOAD IMAGE (MOVE ABOVE :id ROUTES) ================= */
+
+router.post(
+  "/upload-image/:id",
+  auth,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+
+      if (!req.file) {
+        return res.status(400).json({ msg: "No image uploaded" });
+      }
+
+      if (req.user.id !== req.params.id) {
+        return res.status(403).json({ msg: "Not authorized" });
+      }
+
+      const updated = await Business.findByIdAndUpdate(
+        req.params.id,
+        { image: req.file.path },
+        { new: true }
+      ).select("-password");
+
+      res.json(updated);
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error.message });
+    }
+  }
+);
+
 /* ================= GET SINGLE BUSINESS ================= */
 
 router.get('/:id', async (req, res) => {
-    const business = await Business.findById(req.params.id);
+    const business = await Business.findById(req.params.id).select("-password");
     res.json(business);
 });
 
-/* ================= UPDATE BUSINESS (Protected) ================= */
+/* ================= UPDATE BUSINESS ================= */
 
 router.put('/:id', auth, async (req, res) => {
 
-    // 🔒 Prevent updating someone else's business
     if (req.user.id !== req.params.id) {
         return res.status(403).json({ msg: "Not authorized" });
     }
@@ -106,7 +138,7 @@ router.put('/:id', auth, async (req, res) => {
         req.params.id,
         req.body,
         { new: true }
-    );
+    ).select("-password");
 
     res.json(updated);
 });

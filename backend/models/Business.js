@@ -9,6 +9,7 @@ const businessSchema = new mongoose.Schema({
     category: String,
     description: String,
     location: String,
+    image: String
 });
 
 module.exports = mongoose.model('Business', businessSchema);

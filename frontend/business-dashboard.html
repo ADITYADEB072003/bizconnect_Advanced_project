@@ -13,17 +13,47 @@ if (!localStorage.getItem("token") || localStorage.getItem("role") !== "business
 }
 </script>
 
-<h2>Edit Business Profile</h2>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">BizConnect</div>
+    <button class="btn danger" onclick="logout()">Logout</button>
+</nav>
 
-<button onclick="logout()">Logout</button><br><br>
+<!-- DASHBOARD -->
+<div class="dashboard-container">
+    
+    <h2>Edit Business Profile</h2>
 
-<input id="businessName"><br>
-<input id="ownerName"><br>
-<input id="category"><br>
-<textarea id="description"></textarea><br>
-<input id="location"><br>
+    <!-- IMAGE PREVIEW -->
+    <div class="image-preview">
+        <img id="previewImage" src="" alt="Business Image">
+    </div>
 
-<button onclick="updateBusiness()">Update Profile</button>
+    <!-- FORM -->
+    <form onsubmit="updateBusiness(event)">
+        
+        <label>Business Name</label>
+        <input id="businessName" required>
+
+        <label>Owner Name</label>
+        <input id="ownerName">
+
+        <label>Category</label>
+        <input id="category">
+
+        <label>Description</label>
+        <textarea id="description"></textarea>
+
+        <label>Location</label>
+        <input id="location">
+
+        <label>Upload Business Image</label>
+        <input type="file" id="image" accept="image/*" onchange="previewImage(event)">
+
+        <button type="submit" class="btn full">Update Profile</button>
+
+    </form>
+</div>
 
 </body>
 </html>

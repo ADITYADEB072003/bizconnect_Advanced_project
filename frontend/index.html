@@ -1,15 +1,33 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>BizConnect</title>
-<link rel="stylesheet" href="css/style.css">
+    <title>BizConnect</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>BizConnect</h1>
-<a href="user-register.html">User Register</a><br>
-<a href="user-login.html">User Login</a><br>
-<a href="business-register.html">Business Register</a><br>
-<a href="business-login.html">Business Login</a>
+
+<nav class="navbar">
+    <div class="logo">BizConnect</div>
+    <div>
+        <a href="user-login.html">User Login</a>
+        <a href="business-login.html" class="btn">Business Login</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Discover & Connect with Local Businesses</h1>
+    <p>Find the best businesses around you with ease.</p>
+</section>
+
+<section class="business-section">
+    <h2>Featured Businesses</h2>
+    <div id="businessList" class="business-grid"></div>
+</section>
+
+<script src="js/app.js"></script>
+<script>
+    loadBusinesses();
+</script>
+
 </body>
 </html>
