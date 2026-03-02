@@ -1,33 +1,254 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>BizConnect</title>
-    <link rel="stylesheet" href="css/style.css">
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "midnight": "#0f172a",
+                        "violet-electric": "#7c3aed",
+                        "slate-custom": "#64748b"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-
-<nav class="navbar">
-    <div class="logo">BizConnect</div>
-    <div>
-        <a href="user-login.html">User Login</a>
-        <a href="business-login.html" class="btn">Business Login</a>
-    </div>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-20 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2 text-midnight dark:text-white">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+<h2 class="text-xl font-black leading-tight tracking-tight">BizConnect</h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Solutions</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Pricing</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">About</a>
 </nav>
+<div class="flex items-center gap-4">
+    <a href="log.html">
+<button class="hidden sm:block text-sm font-bold px-4 py-2 text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">Log In</button></a>
 
-<section class="hero">
-    <h1>Discover & Connect with Local Businesses</h1>
-    <p>Find the best businesses around you with ease.</p>
+<a href="getstarted.html">
+<button class="bg-primary text-white text-sm font-bold px-6 py-2.5 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+                        Get Started
+                    </button></a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative w-full px-6 md:px-20 py-16 md:py-24">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="flex flex-col gap-8 order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        New: Enterprise v2.0
+                    </div>
+<h1 class="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight text-midnight dark:text-white">
+                        Empower Your <span class="text-primary">Business</span> Growth
+                    </h1>
+<p class="text-lg md:text-xl text-slate-custom dark:text-slate-400 max-w-lg leading-relaxed">
+                        Unlock the full potential of your enterprise with our high-end networking and analytics platform. Built for the modern visionary.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all flex items-center gap-2">
+                            Start Your Journey <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-midnight dark:text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined fill-1">play_circle</span> Watch Demo
+                        </button>
+</div>
+</div>
+<div class="relative order-1 lg:order-2">
+<div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-violet-electric/20 to-primary/10 blur-3xl rounded-full"></div>
+<div class="rounded-3xl overflow-hidden shadow-2xl shadow-midnight/20 border border-white/20">
+<img alt="Abstract 3D Business Graphic" class="w-full h-full object-cover aspect-square md:aspect-video lg:aspect-square" data-alt="Abstract 3D digital wireframe data visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQp5-Q28wW9ZI9zWliEJeCxj6YftjsE2_Du2cERIoGwwtd3kCf2ZS2YDV-EoaaUbgxvfbbDqe6OVVT2ntAF45wu0q6h32BrAz17TGt4ScJELTKRJybryWg2n52v34ndh6_zgwDktqH7EKuHlv_a3MCBQHbn2b0M_vS0zY0AMb1xhoetz_2r2gOF8ewaLGli8J45vPkEdFM7_RoYA-rtCRigsCs20yVTYyMceo0D1bB6angFBVgSso9ru_rL7urOFvMbCVu3njEmn4"/>
+</div>
+</div>
+</div>
 </section>
-
-<section class="business-section">
-    <h2>Featured Businesses</h2>
-    <div id="businessList" class="business-grid"></div>
+<!-- Trusted By Section -->
+<section class="w-full py-12 border-y border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-black/10">
+<div class="max-w-7xl mx-auto px-6">
+<p class="text-center text-slate-custom dark:text-slate-500 font-bold text-sm uppercase tracking-[0.2em] mb-10">Trusted by industry leaders worldwide</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center gap-2 text-2xl font-black text-midnight dark:text-white">
+<span class="material-symbols-outlined text-primary">token</span> NEXUS
+                    </div>
+<div class="flex items-center gap-2 text-2xl font-black text-midnight dark:text-white">
+<span class="material-symbols-outlined text-primary">change_history</span> VELOCITY
+                    </div>
+<div class="flex items-center gap-2 text-2xl font-black text-midnight dark:text-white">
+<span class="material-symbols-outlined text-primary">radio_button_checked</span> ORBIT
+                    </div>
+<div class="flex items-center gap-2 text-2xl font-black text-midnight dark:text-white">
+<span class="material-symbols-outlined text-primary">view_quilt</span> SYNERGY
+                    </div>
+<div class="flex items-center gap-2 text-2xl font-black text-midnight dark:text-white">
+<span class="material-symbols-outlined text-primary">grain</span> QUANTUM
+                    </div>
+</div>
+</div>
 </section>
-
-<script src="js/app.js"></script>
-<script>
-    loadBusinesses();
-</script>
-
-</body>
-</html>
+<!-- Zig-Zag Features -->
+<section class="w-full py-24 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-6 flex flex-col gap-32">
+<!-- Feature 1 -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="flex flex-col gap-6">
+<div class="w-16 h-16 rounded-2xl bg-violet-electric/10 flex items-center justify-center text-violet-electric">
+<span class="material-symbols-outlined text-4xl">monitoring</span>
+</div>
+<h2 class="text-4xl font-bold tracking-tight text-midnight dark:text-white">Deep Analytics</h2>
+<p class="text-lg text-slate-custom dark:text-slate-400 leading-relaxed">
+                            Gain unparalleled insights into your business performance with our sophisticated data modeling tools. Monitor every KPI with precision and clarity using our slate-gray dashboard interface.
+                        </p>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center gap-3 font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary">check_circle</span> Real-time data streaming
+                            </li>
+<li class="flex items-center gap-3 font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary">check_circle</span> Predictive modeling engine
+                            </li>
+</ul>
+</div>
+<div class="rounded-3xl overflow-hidden bg-white dark:bg-slate-800 p-4 shadow-xl shadow-midnight/5 border border-slate-100 dark:border-slate-700">
+<img alt="Data Dashboard" class="rounded-2xl w-full h-[400px] object-cover" data-alt="Complex professional data dashboard with various charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSh5EKWf-LcUi6AxcO7HsWRN4r-BtumewBKQbd4o6oLiGmOswAS6f81np7vA1H0lcK00_X1ebpMB55jouDunjt1l_UVdHu8cWtlGYq5O6ncgc3XV-WfskIYqjpl-2TBwo038CZP1xiyDXPZ-KjLvDN1T11fYksuL9vuozO94a-BRCeCgQO5dwmXi6f4BXTFBCVJOc3y0RfVPxLepN-F5655L8KIU8pBZSGJDeHyhzC2iNVQMU2zDd8P5faJDzY3t67LyTkwHw8F8E"/>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="rounded-3xl overflow-hidden bg-white dark:bg-slate-800 p-4 shadow-xl shadow-midnight/5 border border-slate-100 dark:border-slate-700 lg:order-1 order-2">
+<img alt="Networking" class="rounded-2xl w-full h-[400px] object-cover" data-alt="Business professionals collaborating in a modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWmKDolws1lMsmlS6Brm5HFMBrkVt2g4LncEL4-uOFOsj02e_ZsXByTIxpSzuY-87APRFEx1mcqWSaxcuweL_jLJxco0inF-TIemHIGW5mNv0eNddmH09KqCzyeQ96hKEfHbbf_uS4e3TbB6_QTKj_RlUmm5aK37V42xBzYm3rBaedMlDajTl2nHb5SCnOp18IHfgbOq-93YkjIhN6r0qEWGcO6YUj2uNpcQ8_xW__I2W07EGIgGtahdKmMBLKw5G2PFbPcNyOYE8"/>
+</div>
+<div class="flex flex-col gap-6 lg:order-2 order-1">
+<div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">language</span>
+</div>
+<h2 class="text-4xl font-bold tracking-tight text-midnight dark:text-white">Global Networking</h2>
+<p class="text-lg text-slate-custom dark:text-slate-400 leading-relaxed">
+                            Connect with millions of professional partners across the globe. Our platform breaks down geographic barriers and facilitates cross-border enterprise collaborations seamlessly.
+                        </p>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center gap-3 font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-violet-electric">check_circle</span> Secure encrypted communication
+                            </li>
+<li class="flex items-center gap-3 font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-violet-electric">check_circle</span> Global compliance standard
+                            </li>
+</ul>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="flex flex-col gap-6">
+<div class="w-16 h-16 rounded-2xl bg-midnight flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-4xl">auto_awesome</span>
+</div>
+<h2 class="text-4xl font-bold tracking-tight text-midnight dark:text-white">Smart Matchmaking</h2>
+<p class="text-lg text-slate-custom dark:text-slate-400 leading-relaxed">
+                            Stop wasting time searching. Our AI-driven algorithms analyze your business profile and automatically suggest high-value partners that align with your strategic goals.
+                        </p>
+<div class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border-l-4 border-primary">
+<p class="italic text-midnight dark:text-white font-medium">"BizConnect's matching reduced our search time by 75%, leading to a $2M partnership within weeks."</p>
+</div>
+</div>
+<div class="rounded-3xl overflow-hidden bg-white dark:bg-slate-800 p-4 shadow-xl shadow-midnight/5 border border-slate-100 dark:border-slate-700">
+<img alt="AI Matchmaking" class="rounded-2xl w-full h-[400px] object-cover" data-alt="Abstract neural network nodes connecting digitally" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQgiZfDMNb1T5IcZQviGpGlaw4N7lzS_Rb-OsXIKiLrK8Ut-BLQsN7to6CiSXk6S5L4juMR1d3RTCh23eLVKU5rqoNaPI7GMP9QQAj9fMioz0mOgTuPp8LjcEuhesnxm3VCQU82O8d6rb9axSUquQvfL5PNH5FUVkqM8LNAzQMVu374GUbZY7Sy89kDbXH3zk5plZLN3K6jKbuAwvhPLjmiYKjuyOOC-WGRa7pClgH8hRrvFC6OYPHpp_12sw_k9YCzmQanu4K5sc"/>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="w-full px-6 py-20 bg-midnight dark:bg-black overflow-hidden relative">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[120px] -mr-48 -mt-48 rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-violet-electric/20 blur-[120px] -ml-48 -mb-48 rounded-full"></div>
+<div class="max-w-4xl mx-auto text-center flex flex-col gap-8 relative z-10">
+<h2 class="text-4xl md:text-5xl font-black text-white">Ready to transform your business?</h2>
+<p class="text-xl text-slate-400">Join 10,000+ companies scaling faster with BizConnect's ecosystem.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+<button class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-2xl shadow-primary/40">
+                        Start Your Journey Free
+                    </button>
+<button class="bg-transparent border border-slate-700 text-white px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-800 transition-colors">
+                        Contact Sales
+                    </button>
+</div>
+<p class="text-sm text-slate-500">No credit card required. Cancel anytime.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 px-6 md:px-20 py-16">
+<div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12">
+<div class="col-span-2 lg:col-span-2">
+<div class="flex items-center gap-2 text-midnight dark:text-white mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+<h2 class="text-2xl font-black">BizConnect</h2>
+</div>
+<p class="text-slate-custom dark:text-slate-500 max-w-sm mb-6">The world's leading platform for B2B networking and performance analytics. Building the future of enterprise growth.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-midnight dark:text-white">Product</h4>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Features</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Integrations</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Pricing</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Changelog</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-midnight dark:text-white">Company</h4>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">About Us</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Careers</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Legal</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Privacy</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-midnight dark:text-white">Support</h4>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Help Center</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">API Docs</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Community</a>
+<a class="text-slate-custom dark:text-slate-500 hover:text-primary" href="#">Contact</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-slate-500">© 2024 BizConnect Inc. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-sm text-slate-500 hover:text-primary" href="#">Terms of Service</a>
+<a class="text-sm text-slate-500 hover:text-primary" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
