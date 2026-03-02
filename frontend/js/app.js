@@ -1,5 +1,5 @@
-// const API = "https://bizconnect-advanced-project.onrender.com/api";
-const API = " http://localhost:5000/api";
+ const API = "https://bizconnect-advanced-project.onrender.com/api";
+// const API = " http://localhost:5000/api";
 
 /* ================= USER ================= */
 
