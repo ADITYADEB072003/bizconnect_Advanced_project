@@ -15,7 +15,7 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
-
+app.use("/api/admin", require("./routes/adminRoutes"));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/business', require('./routes/businessRoutes'));
 

@@ -1,11 +1,14 @@
-const API = "https://bizconnect-advanced-project.onrender.com/api";
-// const API = "http://localhost:5000/api";
+// / const API = "https://bizconnect-advanced-project.onrender.com/api";
+//  const API = "http://localhost:5000/api";/
+const API = window.location.hostname === 'localhost' 
+           ? 'http://localhost:5000/api' 
+           : 'https://bizconnect-advanced-project.onrender.com/api';
 
 /* ================= USER ================= */
 
 async function userRegister() {
     try {
-        await fetch(API + "/users/register", {
+        const res = await fetch(API + "/users/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -14,6 +17,8 @@ async function userRegister() {
                 password: document.getElementById("password").value
             })
         });
+
+        if (!res.ok) throw new Error("Registration failed");
 
         alert("User Registered Successfully!");
         window.location = "user-login.html";
@@ -56,7 +61,7 @@ async function userLogin() {
 
 async function businessRegister() {
     try {
-        await fetch(API + "/business/register", {
+        const res = await fetch(API + "/business/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -69,6 +74,8 @@ async function businessRegister() {
                 location: document.getElementById("location").value
             })
         });
+
+        if (!res.ok) throw new Error("Registration failed");
 
         alert("Business Registered Successfully!");
         window.location = "business-login.html";
@@ -113,8 +120,7 @@ async function loadBusinesses() {
     try {
         const res = await fetch(API + "/business");
         const data = await res.json();
-
-        const container = document.getElementById("businessList");
+const container = document.getElementById("list");
         if (!container) return;
 
         if (!data.length) {
@@ -153,63 +159,169 @@ async function loadBusinesses() {
 /* ================= BUSINESS PROFILE ================= */
 
 async function loadBusinessProfile() {
-    const business = JSON.parse(localStorage.getItem("business"));
-    if (!business) return;
+    try {
+        const business = JSON.parse(localStorage.getItem("business"));
+        const token = localStorage.getItem("token");
 
-    const res = await fetch(API + "/business/" + business.id);
-    const data = await res.json();
+        if (!business || !token) return;
 
-    document.getElementById("businessName").value = data.businessName || "";
-    document.getElementById("ownerName").value = data.ownerName || "";
-    document.getElementById("category").value = data.category || "";
-    document.getElementById("description").value = data.description || "";
-    document.getElementById("location").value = data.location || "";
+        const businessId = business._id || business.id;
 
-    if (data.image) {
-        document.getElementById("previewImage").src = data.image;
+        const res = await fetch(API + "/business/" + businessId, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+
+        document.getElementById("businessName").value = data.businessName || "";
+        document.getElementById("ownerName").value = data.ownerName || "";
+        document.getElementById("category").value = data.category || "";
+        document.getElementById("description").value = data.description || "";
+        document.getElementById("location").value = data.location || "";
+
+        if (data.image) {
+            document.getElementById("previewImage").src =
+                data.image + "?t=" + Date.now();
+        }
+
+    } catch (err) {
+        console.error("Profile load error:", err);
     }
 }
 
 async function updateBusiness(e) {
     e.preventDefault();
 
-    const business = JSON.parse(localStorage.getItem("business"));
-    const token = localStorage.getItem("token");
+    try {
+        const business = JSON.parse(localStorage.getItem("business"));
+        const token = localStorage.getItem("token");
+        const businessId = business._id || business.id;
 
-    await fetch(API + "/business/" + business.id, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({
-            businessName: document.getElementById("businessName").value,
-            ownerName: document.getElementById("ownerName").value,
-            category: document.getElementById("category").value,
-            description: document.getElementById("description").value,
-            location: document.getElementById("location").value
-        })
-    });
-
-    const fileInput = document.getElementById("image");
-
-    if (fileInput.files.length > 0) {
-        const formData = new FormData();
-        formData.append("image", fileInput.files[0]);
-
-        await fetch(API + "/business/upload-image/" + business.id, {
-            method: "POST",
+        await fetch(API + "/business/" + businessId, {
+            method: "PUT",
             headers: {
+                "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
             },
-            body: formData
+            body: JSON.stringify({
+                businessName: document.getElementById("businessName").value,
+                ownerName: document.getElementById("ownerName").value,
+                category: document.getElementById("category").value,
+                description: document.getElementById("description").value,
+                location: document.getElementById("location").value
+            })
         });
-    }
 
-    alert("Profile Updated Successfully!");
-    location.reload();
+        const fileInput = document.getElementById("image");
+
+        if (fileInput && fileInput.files.length > 0) {
+            const formData = new FormData();
+            formData.append("image", fileInput.files[0]);
+
+            await fetch(API + "/business/upload-image/" + businessId, {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                body: formData
+            });
+        }
+
+        alert("Profile Updated Successfully!");
+        location.reload();
+
+    } catch (err) {
+        console.error("Update error:", err);
+        alert("Update failed");
+    }
 }
 
+/* ================= IMAGE PREVIEW ================= */
+
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function () {
+        document.getElementById("previewImage").src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+async function loadAdminData() {
+
+    const token = localStorage.getItem("token");
+
+    const usersRes = await fetch(API + "/admin/users", {
+        headers: { Authorization: "Bearer " + token }
+    });
+
+    const businessesRes = await fetch(API + "/admin/businesses", {
+        headers: { Authorization: "Bearer " + token }
+    });
+
+    const users = await usersRes.json();
+    const businesses = await businessesRes.json();
+
+    // Update Stats
+    document.getElementById("totalUsers").innerText = users.length;
+    document.getElementById("totalBusinesses").innerText = businesses.length;
+
+    // Render Users
+    document.getElementById("usersTable").innerHTML =
+        users.map(u => `
+            <tr class="border-b border-slate-700">
+                <td class="p-4">${u.name}</td>
+                <td class="p-4">${u.email}</td>
+                <td class="p-4">
+                    <button onclick="deleteUser('${u._id}')" 
+                        class="bg-red-600 px-3 py-1 rounded">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        `).join("");
+
+    // Render Businesses
+    document.getElementById("businessesTable").innerHTML =
+        businesses.map(b => `
+            <tr class="border-b border-slate-700">
+                <td class="p-4">${b.businessName}</td>
+                <td class="p-4">${b.email}</td>
+                <td class="p-4">
+                    <button onclick="deleteBusiness('${b._id}')" 
+                        class="bg-red-600 px-3 py-1 rounded">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        `).join("");
+}
+
+function showSection(section) {
+    document.getElementById("dashboardSection").classList.add("hidden");
+    document.getElementById("usersSection").classList.add("hidden");
+    document.getElementById("businessesSection").classList.add("hidden");
+
+    document.getElementById(section + "Section").classList.remove("hidden");
+}
+
+async function deleteUser(id) {
+    await fetch(API + "/admin/users/" + id, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+    });
+    loadAdminData();
+}
+
+async function deleteBusiness(id) {
+    await fetch(API + "/admin/businesses/" + id, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+    });
+    loadAdminData();
+}
 /* ================= LOGOUT ================= */
 
 function logout() {

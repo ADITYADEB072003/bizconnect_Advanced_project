@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - BizConnect</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="js/app.js"></script>
+
+</head>
+
+<body class="bg-slate-950 text-white min-h-screen flex">
+
+<script>
+if (!localStorage.getItem("token") || localStorage.getItem("role") !== "admin") {
+    window.location = "admin-login.html";
+}
+</script>
+
+<!-- SIDEBAR -->
+<aside class="w-64 bg-slate-900 border-r border-slate-800 p-6 flex flex-col">
+    <h1 class="text-2xl font-bold mb-8 text-blue-500">BizConnect</h1>
+
+    <nav class="flex flex-col gap-4 text-gray-300">
+        <button onclick="showSection('dashboard')" class="text-left hover:text-white">Dashboard</button>
+        <button onclick="showSection('users')" class="text-left hover:text-white">Users</button>
+        <button onclick="showSection('businesses')" class="text-left hover:text-white">Businesses</button>
+    </nav>
+
+    <button onclick="logout()" class="mt-auto bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">
+        Logout
+    </button>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 p-10 overflow-auto">
+
+    <!-- DASHBOARD -->
+    <div id="dashboardSection">
+        <h2 class="text-3xl font-bold mb-8">Admin Dashboard</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
+                <h3 class="text-gray-400">Total Users</h3>
+                <p id="totalUsers" class="text-3xl font-bold mt-2">0</p>
+            </div>
+
+            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
+                <h3 class="text-gray-400">Total Businesses</h3>
+                <p id="totalBusinesses" class="text-3xl font-bold mt-2">0</p>
+            </div>
+
+            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
+                <h3 class="text-gray-400">System Status</h3>
+                <p class="text-green-400 text-xl mt-2">Active</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- USERS -->
+    <div id="usersSection" class="hidden">
+        <h2 class="text-2xl font-bold mb-6">Users</h2>
+
+        <div class="bg-slate-800 rounded-xl overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-slate-700 text-gray-300">
+                    <tr>
+                        <th class="p-4">Name</th>
+                        <th class="p-4">Email</th>
+                        <th class="p-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- BUSINESSES -->
+    <div id="businessesSection" class="hidden">
+        <h2 class="text-2xl font-bold mb-6">Businesses</h2>
+
+        <div class="bg-slate-800 rounded-xl overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-slate-700 text-gray-300">
+                    <tr>
+                        <th class="p-4">Business Name</th>
+                        <th class="p-4">Email</th>
+                        <th class="p-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="businessesTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>
